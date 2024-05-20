@@ -11,10 +11,11 @@ import {
   Text,
   ButtonList,
 } from "./ui"
+import { colors } from "../colors.css"
 
 export default function Feature(props) {
   return (
-    <Section padding={4} background="muted">
+    <Section padding={4} background="secondary" style={{paddingTop:"2rem"}}>
       <Container>
         <Flex gap={4} variant="responsive">
           <Box width="half" order={props.flip ? 1 : null}>
@@ -26,11 +27,11 @@ export default function Feature(props) {
             )}
           </Box>
           <Box width="half">
-            <Subhead>
+            <Subhead style={{textTransform: "uppercase"}}>
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.heading}
             </Subhead>
-            <Text variant="lead">{props.text}</Text>
+            <Text variant="lead" style={{color: colors.lighttextsecondary}}>{props.text}</Text>
             <ButtonList links={props.links} />
           </Box>
         </Flex>
@@ -45,11 +46,6 @@ export const query = graphql`
     kicker
     heading
     text
-    links {
-      id
-      href
-      text
-    }
     image {
       id
       gatsbyImageData

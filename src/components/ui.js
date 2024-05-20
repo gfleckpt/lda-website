@@ -51,6 +51,8 @@ export function Flex({
 export function Box({
   width = "full",
   background,
+  // customPadding, // Accept custom padding as a prop
+  // paddingKey, // Accept a key to select predefined padding styles
   padding,
   paddingY,
   radius,
@@ -65,6 +67,7 @@ export function Box({
         styles.widths[width],
         background && styles.backgrounds[background],
         padding && styles.padding[padding],
+        // customPadding ? { padding: customPadding } : styles.padding[paddingKey],
         paddingY && styles.paddingY[paddingY],
         radius && styles.radii[radius],
         center && styles.box.center,
@@ -140,27 +143,94 @@ export function Kicker({ ...props }) {
   return <Text variant="kicker" {...props} />
 }
 
-export function Link({ to, href, ...props }) {
+// Helper function for smooth scrolling
+function smoothScrollTo(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}
+
+export function Link({ to, href, closeNav, ...props }) {
   const url = href || to || ""
+
+  const handleLinkClick = (e) => {
+    if (url.includes('/#') && !isAbsoluteURL(url)) {
+      e.preventDefault(); // Prevent default link behavior
+      const [path, anchorId] = url.split('#');
+
+      // If the current pathname matches the path part of the URL, scroll smoothly
+      if (window.location.pathname === path) {
+        smoothScrollTo(anchorId);
+      } else {
+        // If on a different path, navigate to the path then scroll to the anchor
+        window.location.href = url; // This changes the URL and will cause a page refresh
+      }
+    }
+    if (closeNav) {
+      closeNav(); // Call closeNav if provided
+    }
+    if (props.onClick) {
+      props.onClick(e); // Call additional onClick if provided
+    }
+  };
+  
   if (isAbsoluteURL(url)) {
     return (
       // eslint-disable-next-line jsx-a11y/anchor-has-content
       <a href={url} className={styles.link} {...props} />
     )
   }
-  return <GatsbyLink to={url} className={styles.link} {...props} />
+
+  // url.startsWith('#') && 
+  if (!isAbsoluteURL(url)) {
+    // const anchorId = url.substring(1); // Remove the '#' to get the ID
+    return (
+      <GatsbyLink
+        to={url}
+        onClick={handleLinkClick}
+        className={styles.link}
+        {...props}
+      />
+    );
+  }
+
+  return <GatsbyLink to={url} className={styles.link} onClick={handleLinkClick} {...props} />
 }
 
-export function NavLink({ ...props }) {
-  return <Base as={Link} cx={[styles.navlink]} {...props} />
+export function NavLink({ closeNav, ...props }) {
+  return <Base as={Link} cx={[styles.navlink]} closeNav={closeNav} {...props}/>
+}
+
+export function NavLinkSecondary({ closeNav, ...props }) {
+  return <Base as={Link} cx={[styles.navlinkSecondary]} closeNav={closeNav} {...props}/>
 }
 
 export function NavButtonLink({ ...props }) {
   return <Base as="button" cx={[styles.navButtonlink]} {...props} />
 }
 
-export function Button({ variant = "primary", ...props }) {
-  return <Base as={Link} cx={[styles.buttons[variant]]} {...props} />
+
+export function Button({ variant = "primary", disabled, onClick, ...props }) {
+  const handleClick = (event) => {
+    if (disabled) {
+      event.preventDefault()
+    } else if (onClick) {
+      onClick(event)
+    }
+  }
+
+  return (
+    <Base
+      as={Link}
+      cx={[disabled ? styles.buttons[disabled] : styles.buttons[variant], disabled && styles.buttons.disabled]}
+      onClick={handleClick}
+      {...props}
+    />
+  )
 }
 
 export function ButtonList({ links = [], reversed = false, ...props }) {
@@ -246,3 +316,4 @@ export function VisuallyHidden(props) {
 export function BlockLink(props) {
   return <Link className={styles.blockLink} {...props} />
 }
+

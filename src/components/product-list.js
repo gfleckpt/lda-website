@@ -15,7 +15,7 @@ import {
 
 function Product(props) {
   return (
-    <Box center>
+    <Box center style={{marginBottom:"4rem"}}>
       {props.image && (
         <Icon
           alt={props.image.alt}
@@ -32,7 +32,7 @@ function Product(props) {
 
 export default function ProductList(props) {
   return (
-    <Section>
+    <Section style={{marginTop:"3rem"}}>
       <Container>
         <Box center paddingY={4}>
           <Heading>

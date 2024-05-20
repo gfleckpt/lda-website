@@ -1,5 +1,5 @@
 import { style, globalStyle } from "@vanilla-extract/css"
-import { theme } from "../../src/theme.css"
+import { theme } from "../../../src/theme.css"
 
 export const blogPost = style({
   fontSize: theme.fontSizes[3],
@@ -41,10 +41,6 @@ globalStyle(`${blogPost} p`, {
   lineHeight: theme.lineHeights.text,
 })
 
-globalStyle(`${blogPost} > p:first-of-type`, {
-  fontSize: theme.fontSizes[4],
-  fontWeight: theme.fontWeights.bold,
-})
 
 globalStyle(`${blogPost} h2`, {
   fontSize: theme.fontSizes[5],

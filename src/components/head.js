@@ -1,6 +1,6 @@
 import * as React from "react"
 
-export default function Head({ title, description, image }) {
+export default function Head({ title, recaptcha, description, image }) {
   return (
     <>
       <meta charSet="utf-8" />
@@ -18,6 +18,7 @@ export default function Head({ title, description, image }) {
       <meta name="twitter:title" content={title} />
       {description && <meta name="twitter:description" content={description} />}
       {image && <meta name="twitter:image" content={image.url} />}
+      {recaptcha && <script src="https://www.google.com/recaptcha/api.js" async defer></script>}
     </>
   )
 }

@@ -67,10 +67,10 @@ export const query = graphql`
         ...AboutStatListContent
         ...HomepageProductListContent
         ...AboutLeadershipContent
-        ...HomepageBenefitListContent
         ...AboutLogoListContent
         ...HomepageCtaContent
       }
     }
   }
 `
+// ...HomepageBenefitListContent

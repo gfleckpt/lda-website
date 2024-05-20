@@ -134,7 +134,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       text: String
       image: HomepageImage
-      links: [HomepageLink]
     }
 
     interface HomepageFeatureList implements Node & HomepageBlock {
@@ -143,6 +142,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       heading: String
       text: String
+      image: HomepageImage
       content: [HomepageFeature]
     }
 
@@ -184,10 +184,21 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageTestimonial]
     }
 
+    interface BlogPost implements Node {
+      id: ID!
+      slug: String
+      title: String
+      html: String! @richText
+      excerpt: String
+      date: String
+    }
+
     interface HomepageBenefit implements Node {
       id: ID!
       heading: String
-      text: String
+      position: String
+      email: String
+      linkedin: String
       image: HomepageImage
     }
 
@@ -270,8 +281,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       links: [HomepageLink]
       meta: [HomepageLink]
-      socialLinks: [SocialLink]
       copyright: String
+      morada: String
+      codigoPostal: String
+      telefone: String
+      fax: String
+      email: String
     }
 
     interface Layout implements Node {
@@ -340,6 +355,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage
       html: String!
     }
+
+    interface Vantagens implements Node {
+      id: ID!
+      name: String
+      image: HomepageImage
+    }
   `)
 
   // CMS-specific types for Homepage
@@ -396,7 +417,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       text: String
       image: HomepageImage @link(from: "image___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
     }
 
     type ContentfulHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList
@@ -405,6 +425,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       heading: String
       text: String
+      image: HomepageImage @link(from: "image___NODE")
       content: [HomepageFeature] @link(from: "content___NODE")
     }
 
@@ -448,11 +469,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageTestimonial] @link(from: "content___NODE")
     }
 
+    type ContentfulBlogPost implements Node & BlogPost
+      @dontInfer {
+      id: ID!
+      slug: String
+      title: String
+      html: String! @richText
+      excerpt: String
+      date: String
+    }
+
+
     type ContentfulHomepageBenefit implements Node & HomepageBenefit
       @dontInfer {
       id: ID!
       heading: String
-      text: String
+      position: String
+      email: String
+      linkedin: String
       image: HomepageImage @link(from: "image___NODE")
     }
 
@@ -493,6 +527,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link(from: "links___NODE")
     }
 
+    type ContentfulVantagens implements Node & Vantagens
+      @dontInfer {
+      name: String
+      image: HomepageImage @link(from: "image___NODE")
+    }
+
     type ContentfulHomepageProductList implements Node & HomepageProductList & HomepageBlock
       @dontInfer {
       blocktype: String @blocktype
@@ -511,7 +551,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  // CMS specific types for About page
+  // CMS specific types for Blog page
   actions.createTypes(/* GraphQL */ `
     type ContentfulAboutHero implements Node & AboutHero & HomepageBlock
       @dontInfer {
@@ -588,8 +628,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       links: [HomepageLink] @link(from: "links___NODE")
       meta: [HomepageLink] @link(from: "meta___NODE")
-      socialLinks: [SocialLink] @link(from: "socialLinks___NODE")
       copyright: String
+      morada: String
+      codigoPostal: String
+      telefone: String
+      fax: String
+      email: String
     }
 
     type ContentfulLayout implements Node & Layout @dontInfer {

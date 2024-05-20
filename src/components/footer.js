@@ -1,14 +1,6 @@
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import {
-  Twitter,
-  Twitch,
-  Instagram,
-  Facebook,
-  Youtube,
-  GitHub,
-} from "react-feather"
-import {
   Container,
   Flex,
   FlexList,
@@ -16,57 +8,14 @@ import {
   Space,
   NavLink,
   Text,
-  IconLink,
   VisuallyHidden,
+  Subhead,
+  NavLinkSecondary,
 } from "./ui"
 import BrandLogo from "./brand-logo"
+import { colors } from "../colors.css"
+import { theme } from "../theme.css"
 
-const socialMedia = {
-  TWITTER: {
-    url: "https://twitter.com",
-    name: "Twitter",
-    icon: <Twitter />,
-  },
-  INSTAGRAM: {
-    url: "https://instagram.com",
-    name: "Instagram",
-    icon: <Instagram />,
-  },
-  FACEBOOK: {
-    url: "https://facebook.com",
-    name: "Facebook",
-    icon: <Facebook />,
-  },
-  YOUTUBE: {
-    url: "https://youtube.com",
-    name: "YouTube",
-    icon: <Youtube />,
-  },
-  GITHUB: {
-    url: "https://github.com",
-    name: "GitHub",
-    icon: <GitHub />,
-  },
-  TWITCH: {
-    url: "https://twitch.tv",
-    name: "Twitch",
-    icon: <Twitch />,
-  },
-}
-
-const getSocialURL = ({ service, username }) => {
-  const domain = socialMedia[service]?.url
-  if (!domain) return false
-  return `${domain}/${username}`
-}
-
-const getSocialIcon = ({ service }) => {
-  return socialMedia[service]?.icon
-}
-
-const getSocialName = ({ service }) => {
-  return socialMedia[service]?.name
-}
 
 export default function Footer() {
   const data = useStaticQuery(graphql`
@@ -85,43 +34,48 @@ export default function Footer() {
             text
           }
           copyright
-          socialLinks {
-            id
-            service
-            username
-          }
+          morada
+          codigoPostal
+          telefone
+          fax
+          email
         }
       }
     }
   `)
 
-  const { links, meta, socialLinks, copyright } = data.layout.footer
+  const { links, meta, copyright, morada, codigoPostal, telefone, fax, email } = data.layout.footer
 
   return (
-    <Box as="footer" paddingY={4}>
+    <Box as="footer" paddingY={4} background="secondary">
       <Container>
         <Flex variant="start" responsive>
-          <NavLink to="/">
-            <VisuallyHidden>Home</VisuallyHidden>
-            <BrandLogo />
-          </NavLink>
+          <NavLinkSecondary to="/">
+            <VisuallyHidden>Homepage</VisuallyHidden>
+            <BrandLogo width={160} />
+          </NavLinkSecondary>
           <Space />
-          <FlexList>
-            {socialLinks &&
-              socialLinks.map((link) => {
-                const url = getSocialURL(link)
-                return (
-                  url && (
-                    <li key={link.id}>
-                      <IconLink to={url}>
-                        <VisuallyHidden>{getSocialName(link)}</VisuallyHidden>
-                        {getSocialIcon(link)}
-                      </IconLink>
-                    </li>
-                  )
-                )
-              })}
-          </FlexList>
+          <Flex variant="start" gap={5}>
+
+            <Flex variant="columnStart">
+              <Text variant="bold" style={{ textTransform: "uppercase" }}>Morada</Text>
+              <Flex variant="columnStart" gap={0} style={{ color: colors.lighttextsecondary }}>
+                <Text variant="small">{morada}</Text>
+                <Text variant="small">{codigoPostal}</Text>
+              </Flex>
+
+            </Flex>
+
+            <Flex variant="columnStart">
+
+              <Text variant="bold" style={{ textTransform: "uppercase" }}>Contactos</Text>
+              <Flex variant="columnStart" gap={0} style={{ color: colors.lighttextsecondary }}>
+                <Text variant="small">Tel.: {telefone}</Text>
+                <Text variant="small">Fax: {fax}</Text>
+                <Text variant="small">E-mail: {email}</Text>
+              </Flex>
+            </Flex>
+          </Flex>
         </Flex>
         <Space size={5} />
         <Flex variant="start" responsive>
@@ -129,7 +83,7 @@ export default function Footer() {
             {links &&
               links.map((link) => (
                 <li key={link.id}>
-                  <NavLink to={link.href}>{link.text}</NavLink>
+                  <NavLinkSecondary to={link.href}>{link.text}</NavLinkSecondary>
                 </li>
               ))}
           </FlexList>
@@ -137,14 +91,14 @@ export default function Footer() {
           <FlexList>
             {meta &&
               meta.map((link) => (
-                <li key={link.id}>
-                  <NavLink to={link.href}>
+                <li key={link.id} style={{ color: colors.lighttextsecondary }}>
+                  <NavLinkSecondary to={link.href}>
                     <Text variant="small">{link.text}</Text>
-                  </NavLink>
+                  </NavLinkSecondary>
                 </li>
               ))}
           </FlexList>
-          <Text variant="small">{copyright}</Text>
+          <Text variant="small" style={{ color: colors.lighttextsecondary }}>{copyright}</Text>
         </Flex>
       </Container>
       <Space size={3} />

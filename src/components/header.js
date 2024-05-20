@@ -71,13 +71,15 @@ export default function Header() {
   }, [isOpen])
 
   return (
-    <header>
+    <header
+      style={{ boxShadow: "0px 41px 77px rgba(0, 0, 0, 0.03)" }}
+    >
       <Container className={desktopHeaderNavWrapper}>
         <Space size={2} />
         <Flex variant="spaceBetween">
           <NavLink to="/">
             <VisuallyHidden>Home</VisuallyHidden>
-            <BrandLogo />
+            <BrandLogo width={90} />
           </NavLink>
           <nav>
             <FlexList gap={4}>
@@ -96,7 +98,7 @@ export default function Header() {
                 ))}
             </FlexList>
           </nav>
-          <div>{cta && <Button to={cta.href}>{cta.text}</Button>}</div>
+          <div>{cta && <Button to={cta.href} variant="header">{cta.text}</Button>}</div>
         </Flex>
       </Container>
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
@@ -147,7 +149,7 @@ export default function Header() {
                       navItems={navItem.navItems}
                     />
                   ) : (
-                    <NavLink to={navItem.href} className={mobileNavLink}>
+                    <NavLink to={navItem.href} className={mobileNavLink} closeNav={() => setOpen(false)}>
                       {navItem.text}
                     </NavLink>
                   )}

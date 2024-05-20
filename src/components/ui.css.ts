@@ -18,7 +18,20 @@ export const container = style({
   paddingRight: theme.space[4],
 })
 
-export type Containers = "normal" | "wide" | "narrow" | "tight" | "fullbleed"
+// export const heroContainer = style({
+//   maxWidth: theme.sizes.container,
+//   marginLeft: "auto",
+//   marginRight: "auto",
+//   paddingLeft: theme.space[4],
+//   paddingRight: theme.space[4],
+//   "@media": {
+//     [media.small]: {
+//       paddingLeft: theme.space[0],
+//       paddingRight: theme.space[0],
+//     },
+//   });
+
+export type Containers = "normal" | "wide" | "narrow" | "tight" | "fullbleed" | "nomargin" | "hero"
 
 export const containers: Record<Containers, string> = styleVariants({
   normal: [container],
@@ -59,6 +72,25 @@ export const containers: Record<Containers, string> = styleVariants({
       },
     },
   ],
+  nomargin: [
+    container,
+    {
+      maxWidth: "unset"
+    },
+  ],
+  hero: [
+    container,
+    {
+      paddingLeft: theme.space[0],
+      paddingRight: theme.space[0],
+      "@media": {
+        [media.small]: {
+          paddingLeft: theme.space[4],
+          paddingRight: theme.space[4],
+        }
+      }
+    }
+  ]
 })
 
 export const flex = style({
@@ -76,6 +108,7 @@ export type FlexVariants =
   | "stretch"
   | "spaceBetween"
   | "center"
+  | "centerColumn"
   | "responsive"
 
 export const flexVariants: Record<FlexVariants, string> = styleVariants({
@@ -111,11 +144,18 @@ export const flexVariants: Record<FlexVariants, string> = styleVariants({
     flexWrap: "wrap",
     justifyContent: "center",
   },
+  centerColumn: {
+    flexDirection: "column",
+    width: "100%",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
   responsive: {
     flexDirection: "column",
     "@media": {
       [media.small]: {
         flexDirection: "row",
+        // textAlign: "start",
       },
     },
   },
@@ -157,6 +197,17 @@ export const list = style({
   padding: 0,
   margin: 0,
 })
+
+export const mobilePadding = style({
+  paddingLeft: theme.space[4],
+  paddingRight: theme.space[4],
+  '@media': {
+    [media.small]: {
+      paddingLeft: "unset", // Adjust this value to match your mobile padding requirement
+      paddingRight: "unset", // Adjust this value to match your mobile padding requirement
+    }
+  }
+});
 
 export const padding = styleVariants(theme.space, (padding) => ({ padding }))
 export const paddingY = styleVariants(theme.space, (padding) => ({
@@ -426,7 +477,18 @@ export const navlink = style({
   transitionDuration: "0.2s",
   transitionTimingFunction: "ease-in-out",
   ":hover": {
-    color: theme.colors.active,
+    color: theme.colors.hoverFooter,
+  },
+})
+
+export const navlinkSecondary = style({
+  color: "inherit",
+  textDecoration: "none",
+  transitionProperty: "color",
+  transitionDuration: "0.2s",
+  transitionTimingFunction: "ease-in-out",
+  ":hover": {
+    color: theme.colors.hoverFooter,
   },
 })
 
@@ -474,26 +536,28 @@ const button = style({
   borderRadius: theme.radii.button,
 })
 
-export type ButtonVariants = "primary" | "reversed" | "link" | "linkReversed"
+export type ButtonVariants = "primary" | "reversed" | "link" | "linkReversed" | "different" | "header" | "disabled"
 
 export const buttons: Record<ButtonVariants, string> = styleVariants({
   primary: [
     button,
     {
-      color: theme.colors.background,
+      color: theme.colors.secondary,
+      // color: theme.colors.background,
       backgroundColor: theme.colors.primary,
       ":hover": {
-        backgroundColor: theme.colors.active,
+        backgroundColor: theme.colors.lighttextsecondary,
+        color: theme.colors.black
       },
       ":focus": {
-        backgroundColor: theme.colors.active,
+        backgroundColor: theme.colors.lighttextsecondary,
       },
     },
   ],
   reversed: [
     button,
     {
-      color: theme.colors.primary,
+      color: theme.colors.secondary,
       backgroundColor: theme.colors.background,
       ":hover": {
         color: theme.colors.background,
@@ -511,9 +575,11 @@ export const buttons: Record<ButtonVariants, string> = styleVariants({
       color: "inherit",
       backgroundColor: "transparent",
       ":hover": {
-        backgroundColor: theme.colors.muted,
+        color: theme.colors.primary,
+        backgroundColor: theme.colors.terciary,
       },
       ":focus": {
+        color: theme.colors.primary,
         backgroundColor: theme.colors.muted,
       },
     },
@@ -533,6 +599,45 @@ export const buttons: Record<ButtonVariants, string> = styleVariants({
       },
     },
   ],
+  different: [
+    button,
+    {
+      color: theme.colors.primary,
+      backgroundColor: theme.colors.secondary,
+      ":hover": {
+        color: theme.colors.primary,
+        backgroundColor: theme.colors.terciary,
+      },
+      ":focus": {
+        color: theme.colors.primary,
+        backgroundColor: theme.colors.muted,
+      },
+    },
+  ],
+  header: [
+    button,
+    {
+      color: theme.colors.primary,
+      backgroundColor: theme.colors.secondary,
+      ":hover": {
+        color: theme.colors.primary,
+        backgroundColor: theme.colors.terciary,
+      },
+      ":focus": {
+        color: theme.colors.primary,
+        backgroundColor: theme.colors.muted,
+      },
+    },
+  ],
+  disabled: [
+    button,
+    {
+      color: theme.colors.black,
+      backgroundColor: theme.colors.muted,
+      pointerEvents: "none",
+      opacity: 0.5,
+    },
+  ],
 })
 
 export type Backgrounds = "primary" | "muted"
@@ -541,6 +646,14 @@ export const backgrounds: Record<Backgrounds, string> = styleVariants({
   primary: {
     color: theme.colors.background,
     backgroundColor: theme.colors.primary,
+  },
+  secondary: {
+    color: theme.colors.background,
+    backgroundColor: theme.colors.secondary,
+  },
+  darkblue: {
+    color: theme.colors.background,
+    backgroundColor: theme.colors.darkblue,
   },
   muted: {
     color: theme.colors.primary,

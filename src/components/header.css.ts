@@ -9,7 +9,8 @@ export const desktopHeaderNavWrapper = style({
   "@media": {
     [media.small]: {
       display: "block",
-      paddingTop: theme.space[4],
+      paddingTop: theme.space[3],
+      paddingBottom: theme.space[3],
     },
   },
 })
@@ -18,6 +19,7 @@ const mobileHeaderNavWrapperBase = style({
   display: "block",
   position: "relative",
   paddingTop: theme.space[3],
+  paddingBottom: theme.space[3],
   "@media": {
     [media.small]: {
       display: "none",
@@ -29,14 +31,14 @@ export const mobileHeaderNavWrapper = styleVariants({
   open: [
     mobileHeaderNavWrapperBase,
     {
-      background: theme.colors.primary,
+      background: theme.colors.secondary,
     },
   ],
   closed: [mobileHeaderNavWrapperBase],
 })
 
 export const mobileNavSVGColorWrapper = styleVariants({
-  primary: [{ color: theme.colors.primary }],
+  primary: [{ color: theme.colors.secondary }],
   reversed: [{ color: theme.colors.background }],
 })
 
@@ -45,7 +47,7 @@ export const mobileNavOverlay = style({
   width: "100vw",
   height: "100vh",
   paddingTop: theme.space[4],
-  background: theme.colors.primary,
+  background: theme.colors.secondary,
   zIndex: 1,
   "@media": {
     [media.small]: {

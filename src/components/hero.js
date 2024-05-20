@@ -13,10 +13,14 @@ import {
   Text,
 } from "./ui"
 
+import { theme } from "../theme.css"
+import * as styles from './ui.css.ts'; // Adjust the import path according to your project structure
+
+
 export default function Hero(props) {
   return (
-    <Section>
-      <Container>
+    <Section style={{background: theme.colors.secondary, color: theme.colors.lighttext, paddingTop: "0", paddingBottom: "0", paddingLeft: "0", paddingRight: "0" }}>
+      <Container width="hero">
         <Flex gap={4} variant="responsive">
           <Box width="half">
             {props.image && (
@@ -26,7 +30,7 @@ export default function Hero(props) {
               />
             )}
           </Box>
-          <Box width="half">
+          <Box width="half" className={styles.mobilePadding}>
             <Heading as="h1">
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.h1}

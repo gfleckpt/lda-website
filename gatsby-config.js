@@ -6,9 +6,9 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://gatsbycontentfulhomepage.gatsbyjs.io/",
-    title: "Gatsby Contentful Homepage Starter",
-    author: `Gatsby`,
+    siteUrl: "https://lacerdadiasassociados.pt",
+    title: "Lacerda Dias e Associados",
+    author: `G-Fleck`,
     description: "A Gatsby Starter for building homepages with Contentful",
   },
   plugins: [
@@ -21,19 +21,26 @@ module.exports = {
         host: process.env.CONTENTFUL_HOST,
       },
     },
+    `gatsby-transformer-remark`,
     "gatsby-plugin-sharp",
     "gatsby-plugin-image",
     "gatsby-transformer-sharp",
     "gatsby-plugin-vanilla-extract",
     {
+      resolve: 'gatsby-plugin-env-variables',
+      options: {
+        allowList: ["RECAPTCHA_KEY", "RECAPTCHA_SECRET_KEY"]
+      },
+    },
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "Gatsby Starter Contentful Homepage",
-        short_name: "Gatsby",
+        name: "Lacerda Dias e Associados",
+        short_name: "Lacerda Dias e Associados",
         start_url: "/",
         // These can be imported once ESM support lands
-        background_color: "#ffe491",
-        theme_color: "#004ca3",
+        background_color: "#FEF9EA",
+        theme_color: "#660000",
         icon: "src/favicon.png",
       },
     },
