@@ -6,15 +6,12 @@ import {
   FlexList,
   Box,
   Space,
-  NavLink,
   Text,
   VisuallyHidden,
-  Subhead,
   NavLinkSecondary,
 } from "./ui"
 import BrandLogo from "./brand-logo"
 import { colors } from "../colors.css"
-import { theme } from "../theme.css"
 
 
 export default function Footer() {
@@ -70,9 +67,9 @@ export default function Footer() {
 
               <Text variant="bold" style={{ textTransform: "uppercase" }}>Contactos</Text>
               <Flex variant="columnStart" gap={0} style={{ color: colors.lighttextsecondary }}>
-                <Text variant="small">Tel.: {telefone}</Text>
-                <Text variant="small">Fax: {fax}</Text>
-                <Text variant="small">E-mail: {email}</Text>
+                {telefone && <Text variant="small">Tel.: {telefone}</Text>}
+                {fax && <Text variant="small">Fax: {fax}</Text>}
+                {email && <Text variant="small">E-mail: {email}</Text>}
               </Flex>
             </Flex>
           </Flex>

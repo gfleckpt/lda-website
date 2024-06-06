@@ -1,35 +1,35 @@
 import * as React from "react"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import { Container, Box, Heading, Text, Link, Flex } from "../components/ui"
-import ChevronRight from "../components/chevron-right"
-import * as styles from "../components/404.css"
+import {
+  Container,
+  Box,
+  Heading,
+  Space,
+  Kicker,
+  NavLink
+} from "../components/ui"
 import SEOHead from "../components/head"
 
-export default function NotFound() {
+
+export default function NotFound(props) {
+
+
   return (
     <Layout>
-      <Box paddingY={4}>
-        <Container>
-          <Flex variant="column">
-            <Heading variant="mega" className={styles.heading}>
-              404
-            </Heading>
-            <Heading as="h1">Page not found</Heading>
-            <Flex variant="column" gap={0}>
-              <Text variant="lead" className={styles.text}>
-                Sorry! We couldn’t find the page you were looking for.
-              </Text>
-              <Link to="/" className={styles.link}>
-                <span>Back to home</span>
-                <ChevronRight className={styles.linkChevron} />
-              </Link>
-            </Flex>
-          </Flex>
-        </Container>
-      </Box>
+      <Container style={{ minHeight: "650px" }}>
+        <Box paddingY={4}>
+          <Heading as="h1">Página Não Encontrada</Heading>
+           <Space size={4}></Space>
+           <Kicker>A página que estás à procura não existe no nosso website.</Kicker>
+           <Space size={4}></Space>
+        <NavLink to="/">{"<"}- Voltar</NavLink>
+        </Box>
+      </Container>
     </Layout>
   )
 }
-export const Head = () => {
-  return <SEOHead title="404: Page not found" />
+export const Head = (props) => {
+  return <SEOHead title="Lacerda Dias & Associados | Página Não Existe" />
 }
+

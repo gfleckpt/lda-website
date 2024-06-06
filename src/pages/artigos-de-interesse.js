@@ -37,7 +37,7 @@ export default function Noticias(props) {
     <Layout>
       <Container style={{ minHeight: "650px" }}>
         <Box paddingY={4}>
-          <Heading as="h1">Notícias</Heading>
+          <Heading as="h1">Artigos de Interesse</Heading>
           <Space size={4}></Space>
           <FlexList variant="start" gap={0} gutter={3} responsive wrap>
             {visiblePosts.map((post) => (
@@ -62,7 +62,10 @@ export default function Noticias(props) {
 }
 export const Head = (props) => {
   // const { posts } = props.data
-  return <SEOHead title="Noticias" />
+  return <SEOHead
+    title="Lacerda Dias & Associados | Artigos de Interesse"
+    description="A Lacerda Dias & Associados é uma sociedade de advogados independente, vocacionada para o apoio jurídico aos particulares, para a assessoria a empresas e demais organizações, reconhecida pelo seu know-how e pelos resultados apresentados ao cliente."
+  />
 }
 
 export const query = graphql`

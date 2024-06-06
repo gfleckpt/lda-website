@@ -33,7 +33,12 @@ function Benefit({ image, heading, position, text, email, linkedin }) {
     }
   };
 
-  const handlePosition = heading === "Catarina Luís" ? "center 10%" : "center 30%"
+  const positionMap = {
+    "Catarina Luís": "center 10%",
+    "Rita Baptista": "center 20%",
+  };
+
+  const handlePosition = positionMap[heading] || "center 30%"; // Default value if heading doesn't match any key
 
   return (
     <Box as="li" width="half" padding={4} paddingY={4}>
@@ -45,7 +50,7 @@ function Benefit({ image, heading, position, text, email, linkedin }) {
               layout: "constrained",
               aspectRatio: 2 // Adjust this value based on the desired width-to-height ratio
             })}
-            style={{ maxHeight: "17em", width: "auto"}} // Optionally control the size here
+            style={{ maxHeight: "17em", width: "auto" }} // Optionally control the size here
             objectPosition={handlePosition}
           />
         )}
@@ -56,11 +61,21 @@ function Benefit({ image, heading, position, text, email, linkedin }) {
       <hr />
       <Space size={2} />
       <Text>{text.excerpt}</Text>
-      <span onClick={toggleModal} style={{ color: "#993333", cursor: "pointer" }}>Ver Biografia Completa</span>
+      <span
+        onClick={toggleModal}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleModal(); }}
+        role="button"
+        tabIndex="0"
+        style={{ color: "#993333", cursor: "pointer" }}
+      >
+        Ver Biografia Completa
+      </span>
       {isModalOpen && (
         <Flex
           id="modal-overlay"
           onClick={handleOutsideClick}
+          onKeyDown={(e) => { if (e.key === 'Escape') setIsModalOpen(false); }}
+          tabIndex="-1"
           style={{
             position: 'fixed',
             top: 0,

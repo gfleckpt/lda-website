@@ -7,9 +7,9 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     siteUrl: "https://lacerdadiasassociados.pt",
-    title: "Lacerda Dias e Associados",
+    title: "Lacerda Dias e Associados | Sociedade de Advogados S.P.R.L.",
     author: `G-Fleck`,
-    description: "A Gatsby Starter for building homepages with Contentful",
+    description: "A Lacerda Dias & Associados é uma sociedade de advogados independente, vocacionada para o apoio jurídico aos particulares, para a assessoria a empresas e demais organizações, reconhecida pelo seu know-how e pelos resultados apresentados ao cliente.",
   },
   plugins: [
     {
@@ -35,7 +35,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "Lacerda Dias e Associados",
+        name: "Lacerda Dias e Associados | Sociedade de Advogados S.P.R.L.",
         short_name: "Lacerda Dias e Associados",
         start_url: "/",
         // These can be imported once ESM support lands

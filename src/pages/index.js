@@ -20,7 +20,7 @@ export default function Homepage(props) {
         return <Component key={id} {...componentProps} />
       })}
       <Container style={{ marginTop: "5rem", marginBottom: "5rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <Heading>Notícias</Heading>
+        <Heading>Artigos de Interesse</Heading>
         <Space size={4}></Space>
         <FlexList responsive wrap gap={0} gutter={3} variant="start">
           {posts.map((post) => (
@@ -30,7 +30,7 @@ export default function Homepage(props) {
           ))}
         </FlexList>
         <Space size={3}></Space>
-        <div><Button to="/noticias" variant="different">Ver Mais</Button></div>
+        <div><Button to="/artigos-de-interesse" variant="different">Ver Mais</Button></div>
       </Container>
     </Layout>
   )

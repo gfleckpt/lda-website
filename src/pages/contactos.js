@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-// import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import {
     Container,
     Box,
     Heading,
     Space,
-    Button,
     Flex,
     Text
 } from "../components/ui"
@@ -117,6 +115,7 @@ export default function Contactos(props) {
                                     style={styles.iframe}
                                     allowFullScreen=""
                                     loading="lazy"
+                                    title="Maps"
                                     referrerPolicy="no-referrer-when-downgrade"
                                 ></iframe>
                             </div>
@@ -132,6 +131,10 @@ export default function Contactos(props) {
 }
 export const Head = (props) => {
     // const { posts } = props.data
-    return <SEOHead title="Contactos" recaptcha />
+    return <SEOHead
+    title="Lacerda Dias & Associados | Contactos"
+    description="A Lacerda Dias & Associados é uma sociedade de advogados independente, vocacionada para o apoio jurídico aos particulares, para a assessoria a empresas e demais organizações, reconhecida pelo seu know-how e pelos resultados apresentados ao cliente."
+    recaptcha
+    />
 }
 

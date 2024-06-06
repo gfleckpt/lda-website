@@ -1,5 +1,4 @@
 import * as React from "react"
-import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../../components/layout"
 import { graphql } from "gatsby"
 
@@ -10,7 +9,7 @@ import {
   Heading,
   Kicker,
 } from "../../components/ui"
-import * as styles from "./blog-post.css"
+import * as styles from "../../blog-post.css"
 import SEOHead from "../../components/head"
 
 import { format } from "date-fns"
@@ -46,7 +45,7 @@ export default function BlogPost(props) {
 }
 export const Head = (props) => {
   const { blogPost } = props.data
-  return <SEOHead {...blogPost} />
+  return <SEOHead artigo {...blogPost} />
 }
 
 export const query = graphql`

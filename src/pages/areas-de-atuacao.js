@@ -10,7 +10,6 @@ import {
     Section,
     Flex,
     Icon,
-    Kicker,
     Subhead,
     Text
 } from "../components/ui"
@@ -18,7 +17,6 @@ import {
 import SEOHead from "../components/head"
 import { theme } from "../theme.css"
 import { colors } from "../colors.css"
-import Dot from "../components/dot"
 
 
 const AccordionItem = ({ title, description }) => {
@@ -32,9 +30,9 @@ const AccordionItem = ({ title, description }) => {
             }}
         >
             <Box style={{ marginBottom: "0", padding: `${theme.space[4]} 0`, backgroundColor: isOpen ? "#f9f0da" : "transparent", transition: "background-color 0.1s ease-in-out", }}>
-                <Kicker style={{ marginBottom: "0" }}>
+                <Subhead variant="small" style={{ marginBottom: "0" }}>
                     {title}
-                </Kicker>
+                </Subhead>
             </Box>
             {isOpen &&
                 <Text style={{
@@ -67,23 +65,15 @@ function Vantagem(props) {
     )
 }
 
-function SectoresDeActividade(props) {
-    return (
-        <Box as="li" width="third" padding={4} paddingY={3} center>
-            <Flex>
-                {/* <Dot/> */}
-                {/* {props.image && ( */}
-                {/* <Icon
-                        alt={props.image.alt}
-                        image={props.image.gatsbyImageData}
-                        size="small"
-                    /> */}
-                {/* )} */}
-                <Subhead variant="small">{props.name}</Subhead>
-            </Flex>
-        </Box>
-    )
-}
+// function SectoresDeActividade(props) {
+//     return (
+//         <Box as="li" width="third" padding={4} paddingY={3} center>
+//             <Flex>
+//                 <Subhead variant="small">{props.name}</Subhead>
+//             </Flex>
+//         </Box>
+//     )
+// }
 
 export default function AreasDeAtuacao(props) {
     const data = useStaticQuery(graphql`
@@ -128,7 +118,7 @@ export default function AreasDeAtuacao(props) {
     const particulares = areasDeAtuacao.filter(area => area.particulares);
     const empresas = areasDeAtuacao.filter(area => !area.particulares);
     const vantagens = data.allContentfulVantagens.edges.map(edge => edge.node);
-    const sectoresDeActividade = data.allContentfulSectoresDeActividade.edges.map(edge => edge.node);
+    // const sectoresDeActividade = data.allContentfulSectoresDeActividade.edges.map(edge => edge.node);
 
 
     return (
@@ -171,10 +161,14 @@ export default function AreasDeAtuacao(props) {
                         </Box>
                     </FlexList>
 
-                    <Space size={5} />
+                    <Space size={6} />
 
                     <Flex variant="centerColumn">
-                        <Subhead center>Vantagens</Subhead>
+                        <Heading center>Vantagens</Heading>
+                        <Text center >
+                            A sociedade tem forte experiência na assessoria jurídica permanente a empresas e outras organizações, nas principais áreas inerentes aos seus ramos de atividade e nos vários sectores de atividade. O know-how, traduzido na capacidade de orientação e acompanhamento regular aos principais interlocutores é reconhecido como uma mais-valia pelos seus clientes.
+                        </Text>
+                        <Space size={2} />
                         <FlexList gutter={3} variant="start" responsive wrap>
                             {vantagens.map((vantagem) => (
                                 <Vantagem key={vantagem.id} {...vantagem} />
@@ -182,23 +176,7 @@ export default function AreasDeAtuacao(props) {
                         </FlexList>
                     </Flex>
 
-                    <Space size={6} />
-
-                    <Box paddingY={2}>
-                        <Heading center>Sectores de Actividade</Heading>
-                        <Space size={4} />
-                        <Text center >
-                            A sociedade tem forte experiência na assessoria jurídica permanente a empresas e outras organizações, nas principais áreas inerentes aos seus ramos de atividade e nos vários sectores de atividade. O know-how, traduzido na capacidade de orientação e acompanhamento regular aos principais interlocutores é reconhecido como uma mais-valia pelos seus clientes.
-                        </Text>
-                        <Space size={4} />
-
-                        <FlexList gutter={3} variant="start" responsive wrap>
-                            {sectoresDeActividade.map((sectores) => (
-                                <SectoresDeActividade key={sectores.id} {...sectores} />
-                            ))}
-                        </FlexList>
-                        <Space size={5} />
-                    </Box>
+                    <Space size={5} />
                 </Box>
             </Container>
         </Layout>
@@ -206,6 +184,9 @@ export default function AreasDeAtuacao(props) {
 }
 export const Head = (props) => {
     // const { posts } = props.data
-    return <SEOHead title="Áreas de Atuação" />
+    return <SEOHead
+        title="Lacerda Dias & Associados | Áreas de Atuação"
+        description="Na Lacerda Dias & Associados prestamos apoio jurídico de excelência. A nossa equipa está segmentada em vários departamentos e atua em diversas áreas de prática do Direito, tendo em conta as necessidades dos nossos clientes, tanto Particulares como Empresas."
+    />
 }
 
