@@ -30,7 +30,7 @@
     "gatsby-plugin-manifest": "^5.0.0",
     "gatsby-plugin-sharp": "^5.0.0",
     "gatsby-plugin-vanilla-extract": "^4.0.1",
-    "gatsby-source-contentful": "^8.0.0",
+    "gatsby-source-contentful": "^8.13.1",
     "gatsby-source-filesystem": "^5.0.0",
     "gatsby-transformer-remark": "^6.13.1",
     "gatsby-transformer-sharp": "^5.0.0",
@@ -39,7 +39,7 @@
     "react-dom": "^18.0.0",
     "react-feather": "^2.0.9",
     "react-google-recaptcha": "^3.1.0",
-    "sharp": "^0.30.5"
+    "sharp": "^0.32.6"
   },
   "devDependencies": {
     "@types/react-google-recaptcha": "^2.1.9",
