@@ -11,6 +11,26 @@ import {
 
 import SEOHead from "../components/head"
 import ReCAPTCHA from "react-google-recaptcha";
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+
+// try {
+//     await emailjs.send(
+//         process.env.EMAIL_SERVICE_ID,
+//         process.env.EMAIL_TEMPLATE_ID,
+//         {},
+//         {
+//             publicKey: process.env.EMAIL_PUBLIC_KEY,
+//         },
+//     );
+//     console.log('SUCCESS!');
+// } catch (err) {
+//     if (err instanceof EmailJSResponseStatus) {
+//         console.log('EMAILJS FAILED...', err);
+//         return;
+//     }
+
+//     console.log('ERROR', err);
+// }
 
 const styles = {
     iframeContainer: {
@@ -39,9 +59,24 @@ const styles = {
 
 export default function Contactos(props) {
     const [recaptchaValue, setRecaptchaValue] = useState(null);
+    const [formData, setFormData] = useState({
+        name: "",
+        empresa: "",
+        email: "",
+        contacto: "",
+        message: "",
+    });
 
     const handleRecaptchaChange = (value) => {
         setRecaptchaValue(value);
+    };
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
     };
 
     const handleSubmit = async (event) => {
@@ -52,30 +87,57 @@ export default function Contactos(props) {
         }
 
         // Your form data
-        const formData = {
-            // Add your other form fields here
-            token: recaptchaValue,
-        };
+        // const formData = {
+        //     // Add your other form fields here
+        //     token: recaptchaValue,
+        // };
 
+        // try {
+        //     const response = await fetch("/api/verifyRecaptcha", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(formData),
+        //     });
+
+        //     const result = await response.json();
+
+        //     if (response.ok) {
+        //         alert("Form submitted successfully");
+        //     } else {
+        //         alert(result.message);
+        //     }
+        // } catch (error) {
+        //     console.error("Error submitting form:", error);
+        //     alert("Error submitting form");
+        // }
         try {
-            const response = await fetch("/api/verifyRecaptcha", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
+            await emailjs.send(
+                process.env.EMAIL_SERVICE_ID,
+                process.env.EMAIL_TEMPLATE_ID,
+                {
+                    name: formData.name,
+                    empresa: formData.empresa,
+                    email: formData.email,
+                    contacto: formData.contacto,
+                    message: formData.message,
+                    'g-recaptcha-response': recaptchaValue,
                 },
-                body: JSON.stringify(formData),
+                process.env.EMAIL_PUBLIC_KEY
+            );
+            alert("Formulário enviado com sucesso.");
+            setFormData({
+                name: "",
+                empresa: "",
+                email: "",
+                contacto: "",
+                message: "",
             });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                alert("Form submitted successfully");
-            } else {
-                alert(result.message);
-            }
-        } catch (error) {
-            console.error("Error submitting form:", error);
-            alert("Error submitting form");
+            setRecaptchaValue(null);
+        } catch (err) {
+            console.error("Erro a enviar formulário:", err);
+            alert("Erro a enviar formulário");
         }
     };
 
@@ -89,11 +151,25 @@ export default function Contactos(props) {
                 <Flex responsive>
                     <Box>
                         <form className="cf" onSubmit={handleSubmit}>
-                            <input type="text" id="input-name" name="nome" placeholder="Nome" required />
-                            <input type="text" id="input-empresa" name="empresa" placeholder="Empresa" />
-                            <input type="email" id="input-email" name="email" placeholder="Endereço de Email" />
-                            <input type="text" id="input-contacto" name="contacto" placeholder="Contacto Telefónico" />
-                            <textarea id="input-message" type="text" name="mensagem" placeholder="Mensagem" required></textarea>
+                            <input type="text" id="input-name" name="name" placeholder="Nome" required
+                                value={formData.name}
+                                onChange={handleInputChange}
+                            />
+                            <input type="text" id="input-empresa" name="empresa" placeholder="Empresa"
+                                value={formData.empresa}
+                                onChange={handleInputChange}
+                            />
+                            <input type="email" id="input-email" name="email" placeholder="Endereço de Email" required
+                                value={formData.email}
+                                onChange={handleInputChange}
+                            />
+                            <input type="text" id="input-contacto" name="contacto" placeholder="Contacto Telefónico"
+                                value={formData.contacto}
+                                onChange={handleInputChange}
+                            />
+                            <textarea id="input-message" type="text" name="message" placeholder="Mensagem" required
+                                value={formData.message}
+                                onChange={handleInputChange}></textarea>
                             <Space size={3} />
                             <Box>
                                 {/* Add reCAPTCHA here */}
@@ -132,9 +208,9 @@ export default function Contactos(props) {
 export const Head = (props) => {
     // const { posts } = props.data
     return <SEOHead
-    title="Lacerda Dias & Associados | Contactos"
-    description="A Lacerda Dias & Associados é uma sociedade de advogados independente, vocacionada para o apoio jurídico aos particulares, para a assessoria a empresas e demais organizações, reconhecida pelo seu know-how e pelos resultados apresentados ao cliente."
-    recaptcha
+        title="Lacerda Dias & Associados | Contactos"
+        description="A Lacerda Dias & Associados é uma sociedade de advogados independente, vocacionada para o apoio jurídico aos particulares, para a assessoria a empresas e demais organizações, reconhecida pelo seu know-how e pelos resultados apresentados ao cliente."
+        recaptcha
     />
 }
 

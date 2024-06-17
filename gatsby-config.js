@@ -29,7 +29,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-env-variables',
       options: {
-        allowList: ["RECAPTCHA_KEY", "RECAPTCHA_SECRET_KEY"]
+        allowList: ["RECAPTCHA_KEY", "RECAPTCHA_SECRET_KEY", "EMAIL_TEMPLATE_ID", "EMAIL_SERVICE_ID", "EMAIL_PUBLIC_KEY"]
       },
     },
     {
