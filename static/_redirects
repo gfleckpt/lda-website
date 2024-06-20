@@ -3,3 +3,6 @@ https://lacerdadias-associados.pt/*  https://lacerdadiasassociados.pt/:splat  30
 
 # Redirect lacerdadiasassociados.com (HTTP) to lacerdadiasassociados.pt
 http://lacerdadiasassociados.com/*  https://lacerdadiasassociados.pt/:splat  301!
+
+# Redirect lacerdadiasassociados.com (HTTPS) to lacerdadiasassociados.pt
+https://lacerdadiasassociados.com/*  https://lacerdadiasassociados.pt/:splat  301!
