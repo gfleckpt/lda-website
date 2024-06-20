@@ -90,3 +90,11 @@ form textarea {
 .cf:after {
   clear: both;
 }
+
+.areaAccordion {
+  transition: 0.3s;
+}
+
+.areaAccordion:hover {
+  background: #F9F0DB;
+}

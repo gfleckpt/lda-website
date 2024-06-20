@@ -24,6 +24,7 @@ const AccordionItem = ({ title, description }) => {
 
     return (
         <Box center onClick={() => setIsOpen(!isOpen)}
+            className="areaAccordion"
             style={{
                 cursor: "pointer",
                 borderTop: isOpen ? `1px solid ${colors.terciary}` : "1px solid #dbd9d2",

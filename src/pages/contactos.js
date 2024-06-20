@@ -11,26 +11,9 @@ import {
 
 import SEOHead from "../components/head"
 import ReCAPTCHA from "react-google-recaptcha";
-import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 
-// try {
-//     await emailjs.send(
-//         process.env.EMAIL_SERVICE_ID,
-//         process.env.EMAIL_TEMPLATE_ID,
-//         {},
-//         {
-//             publicKey: process.env.EMAIL_PUBLIC_KEY,
-//         },
-//     );
-//     console.log('SUCCESS!');
-// } catch (err) {
-//     if (err instanceof EmailJSResponseStatus) {
-//         console.log('EMAILJS FAILED...', err);
-//         return;
-//     }
 
-//     console.log('ERROR', err);
-// }
 
 const styles = {
     iframeContainer: {

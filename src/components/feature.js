@@ -15,10 +15,10 @@ import { colors } from "../colors.css"
 
 export default function Feature(props) {
   return (
-    <Section padding={4} background="secondary" style={{paddingTop:"2rem"}}>
+    <Section padding={4} background="secondary" style={{paddingTop:"6rem"}}>
       <Container>
         <Flex gap={4} variant="responsive">
-          <Box width="half" order={props.flip ? 1 : null}>
+          <Box width="half" order={props.flip ? 1 : null} style={{boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px"}}>
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}
