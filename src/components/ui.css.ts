@@ -481,6 +481,17 @@ export const navlink = style({
   },
 })
 
+export const navlinklogo = style({
+  color: theme.colors.active,
+  textDecoration: "none",
+  transitionProperty: "color",
+  transitionDuration: "0.2s",
+  transitionTimingFunction: "ease-in-out",
+  ":hover": {
+    color: theme.colors.hoverFooter,
+  },
+})
+
 export const navlinkSecondary = style({
   color: "inherit",
   textDecoration: "none",

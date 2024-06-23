@@ -205,6 +205,10 @@ export function NavLink({ closeNav, ...props }) {
   return <Base as={Link} cx={[styles.navlink]} closeNav={closeNav} {...props}/>
 }
 
+export function NavLinkLogo({ closeNav, ...props }) {
+  return <Base as={Link} cx={[styles.navlinklogo]} closeNav={closeNav} {...props}/>
+}
+
 export function NavLinkSecondary({ closeNav, ...props }) {
   return <Base as={Link} cx={[styles.navlinkSecondary]} closeNav={closeNav} {...props}/>
 }

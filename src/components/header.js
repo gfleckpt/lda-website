@@ -7,6 +7,7 @@ import {
   FlexList,
   Space,
   NavLink,
+  NavLinkLogo,
   Button,
   InteractiveIcon,
   Nudge,
@@ -77,10 +78,10 @@ export default function Header() {
       <Container className={desktopHeaderNavWrapper}>
         <Space size={2} />
         <Flex variant="spaceBetween">
-          <NavLink to="/">
+          <NavLinkLogo to="/">
             <VisuallyHidden>Home</VisuallyHidden>
-            <BrandLogo width={130} />
-          </NavLink>
+            <BrandLogo width={160} />
+          </NavLinkLogo>
           <nav>
             <FlexList gap={4}>
               {navItems &&
